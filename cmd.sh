@@ -19,16 +19,13 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   useradd -l -u ${USER_ID} -g daemon daemon;
   install -d -m 0755 -o daemon -g daemon /home/daemon;
 
-  #TODO
   #https://stackoverflow.com/q/65574334/3929620
+  chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
+
+  #TODO
   #https://stackoverflow.com/a/47081858/3929620
   #https://superuser.com/a/1145014
-  #set -- "runuser" "-u" ${USER_ID} "-g" ${GROUP_ID} "-c" "$@"
-  set -- "chown" "-Rf" ${USER_ID}:${GROUP_ID} "/var/www/html" "&&" "$@"
-fi
-
-
-FILE=/docker-entrypoint.sh
-if [ -f "$FILE" ]; then
-  . $FILE;
+  runuser -u ${USER_ID} -g ${GROUP_ID} -c 'php-fpm'
+else
+  php-fpm
 fi
