@@ -6,4 +6,5 @@ COPY cmd.sh /
 #https://github.com/docker-library/postgres/issues/296#issuecomment-308735942
 RUN chmod +x /cmd.sh
 
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD [ "/cmd.sh" ]
