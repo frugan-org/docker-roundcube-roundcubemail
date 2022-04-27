@@ -9,11 +9,6 @@ set -e
 #set -o xtrace # Uncomment this line for debugging purpose
 
 
-FILE=/docker-entrypoint.sh
-if [ -f "$FILE" ]; then
-  . $FILE;
-fi
-
 #https://jtreminio.com/blog/running-docker-containers-as-current-host-user/#ok-so-what-actually-works
 if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   userdel -f daemon;
@@ -26,7 +21,13 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
 
   #https://stackoverflow.com/q/65574334/3929620
   chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
-  exec runuser -u ${USER_ID} "$@"
-else
-  exec "$@"
+
+  #https://stackoverflow.com/a/47081858/3929620
+  set -- "runuser" "-u" ${USER_ID} "$@"
+fi
+
+
+FILE=/docker-entrypoint.sh
+if [ -f "$FILE" ]; then
+  . $FILE;
 fi
