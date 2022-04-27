@@ -23,7 +23,7 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
 
   #https://stackoverflow.com/a/47081858/3929620
-  set -- "runuser" "-u" ${USER_ID} "$@"
+  set -- "runuser" "-u" ${USER_ID} "-g" ${GROUP_ID} "-c" "$@"
 fi
 
 
