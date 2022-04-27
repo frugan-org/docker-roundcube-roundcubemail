@@ -25,6 +25,7 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   #TODO
   #https://stackoverflow.com/a/47081858/3929620
   #https://superuser.com/a/1145014
+  groupadd -g ${GROUP_ID} daemon;
   runuser -u ${USER_ID} -g ${GROUP_ID} -c 'php-fpm'
 else
   php-fpm
