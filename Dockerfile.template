@@ -1,6 +1,5 @@
 FROM roundcube/roundcubemail:%%TAG%%
 
-####
 
 COPY entrypoint.sh /
 

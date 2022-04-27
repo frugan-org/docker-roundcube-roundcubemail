@@ -14,7 +14,6 @@ if [ -f "$FILE" ]; then
   . $FILE;
 fi
 
-
 #https://jtreminio.com/blog/running-docker-containers-as-current-host-user/#ok-so-what-actually-works
 if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   userdel -f daemon;
@@ -24,13 +23,10 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   groupadd -g ${GROUP_ID} daemon;
   useradd -l -u ${USER_ID} -g daemon daemon;
   install -d -m 0755 -o daemon -g daemon /home/daemon;
-  #chown --changes --silent --no-dereference --recursive --from=33:33 ${USER_ID}:${GROUP_ID}
-  #    /home/daemon
-  #    /.composer
-  #    /var/run/php-fpm
-  #    /var/lib/php/sessions
-  #;
+
+  #https://stackoverflow.com/q/65574334/3929620
+  chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
+  exec runuser -u ${USER_ID} "$@"
+else
+  exec "$@"
 fi
-
-
-exec "$@"
