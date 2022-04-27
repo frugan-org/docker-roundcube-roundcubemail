@@ -22,8 +22,10 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   #https://stackoverflow.com/q/65574334/3929620
   chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
 
+  #TODO
   #https://stackoverflow.com/a/47081858/3929620
-  set -- "runuser" "-u" ${USER_ID} "-g" ${GROUP_ID} "-c" "$@"
+  #https://superuser.com/a/1145014
+  #set -- "runuser" "-u" ${USER_ID} "-g" ${GROUP_ID} "-c" "$@"
 fi
 
 
