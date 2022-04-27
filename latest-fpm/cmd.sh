@@ -22,10 +22,11 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   #https://stackoverflow.com/q/65574334/3929620
   chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
 
-  #TODO
+  #TODO - ERROR: failed to open error_log (/proc/self/fd/2): Permission denied (13)
   #https://stackoverflow.com/a/47081858/3929620
   #https://superuser.com/a/1145014
-  runuser -u daemon -- php-fpm
+  #runuser -u daemon -- php-fpm
+  php-fpm
 else
   php-fpm
 fi
