@@ -14,7 +14,7 @@ TAGS=(
   latest-fpm
 )
 
-CMD=cmd.sh
+ENTRYPOINT=entrypoint.sh
 
 for TAG in ${TAGS[*]}; do
 
@@ -25,8 +25,8 @@ for TAG in ${TAGS[*]}; do
   mkdir $TAG
   deploy Dockerfile.template > $TAG/Dockerfile
 
-  if [ -f "$CMD" ]; then
-    cp $CMD $TAG
+  if [ -f "$ENTRYPOINT" ]; then
+    cp $ENTRYPOINT $TAG
   fi
 
 done

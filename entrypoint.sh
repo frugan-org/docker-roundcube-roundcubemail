@@ -9,6 +9,13 @@ set -e
 #set -o xtrace # Uncomment this line for debugging purpose
 
 
+sed -i \
+    -e 's/^exec "$@"//' \
+    /docker-entrypoint.sh;
+
+#https://stackoverflow.com/a/46433245/3929620
+. /docker-entrypoint.sh
+
 #https://jtreminio.com/blog/running-docker-containers-as-current-host-user/#ok-so-what-actually-works
 if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   userdel -f daemon;
@@ -25,8 +32,7 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   #TODO - ERROR: failed to open error_log (/proc/self/fd/2): Permission denied (13)
   #https://stackoverflow.com/a/47081858/3929620
   #https://superuser.com/a/1145014
-  #runuser -u daemon -- php-fpm
-  php-fpm
-else
-  php-fpm
+  #set -- 'runuser' '-u' 'daemon' '-c' "$@"
 fi
+
+exec "$@"
