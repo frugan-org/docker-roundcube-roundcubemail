@@ -16,6 +16,12 @@ sed -i \
 #https://stackoverflow.com/a/46433245/3929620
 . /docker-entrypoint.sh
 
+
+if ! grep -q "config.local.inc.php" config/config.inc.php; then
+  echo "if( file_exists(__DIR__ . '/config.local.inc.php') ) { include(__DIR__ . '/config.local.inc.php'); }" >> config/config.inc.php
+fi
+
+
 #https://jtreminio.com/blog/running-docker-containers-as-current-host-user/#ok-so-what-actually-works
 if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   userdel -f daemon;
@@ -26,8 +32,9 @@ if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then
   useradd -l -u ${USER_ID} -g daemon daemon;
   install -d -m 0755 -o daemon -g daemon /home/daemon;
 
+  #TODO
   #https://stackoverflow.com/q/65574334/3929620
-  chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
+  #chown -Rf ${USER_ID}:${GROUP_ID} /var/www/html
 
   #TODO - ERROR: failed to open error_log (/proc/self/fd/2): Permission denied (13)
   #https://stackoverflow.com/a/47081858/3929620
