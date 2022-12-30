@@ -1,0 +1,10 @@
+FROM roundcube/roundcubemail:1.4.10-fpm
+
+
+COPY entrypoint.sh /
+
+#https://github.com/docker-library/postgres/issues/296#issuecomment-308735942
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD [ "php-fpm" ]
