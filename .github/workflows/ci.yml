@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         name: Build and push [1.4.10-fpm]
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./1.4.10-fpm
           push: true
@@ -40,7 +40,7 @@ jobs:
           cache-to: type=gha,mode=max
       -
         name: Build and push [latest-fpm]
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./latest-fpm
           push: true
