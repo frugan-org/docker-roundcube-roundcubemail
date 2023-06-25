@@ -1,4 +1,4 @@
-FROM roundcube/roundcubemail:latest-fpm
+FROM roundcubeorg/roundcubemail:latest-fpm
 
 
 COPY entrypoint.sh /

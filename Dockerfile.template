@@ -1,4 +1,4 @@
-FROM roundcube/roundcubemail:%%TAG%%
+FROM roundcubeorg/roundcubemail:%%TAG%%
 
 
 COPY entrypoint.sh /

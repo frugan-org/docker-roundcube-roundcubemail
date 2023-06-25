@@ -11,7 +11,8 @@ deploy() {
 }
 
 TAGS=(
-  1.4.10-fpm
+  #1.4.10-fpm
+  #1.6.x-fpm
   latest-fpm
 )
 
