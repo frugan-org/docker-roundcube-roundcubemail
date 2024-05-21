@@ -40,5 +40,5 @@ https://github.com/KristinitaTest/KristinitaTest.github.io/blob/master/donate/Bi
 
 ### License
 
-(ɔ) Copyleft 2023 [Frugan](https://frugan.it)
+(ɔ) Copyleft 2024 [Frugan](https://frugan.it)
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/), see [COPYING](COPYING) file.
