@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1091
 
-set -e
+#set -e
 #set -o errexit
 #set -o nounset
 #set -o pipefail
@@ -17,8 +17,8 @@ sed -i \
 . /docker-entrypoint.sh
 
 
-if ! grep -q "config.local.inc.php" config/config.inc.php; then
-  echo "if( file_exists(__DIR__ . '/config.local.inc.php') ) { include(__DIR__ . '/config.local.inc.php'); }" >> config/config.inc.php
+if ! grep -q "config.custom.inc.php" config/config.inc.php; then
+  echo "if( file_exists(__DIR__ . '/config.custom.inc.php') ) { include(__DIR__ . '/config.custom.inc.php'); }" >> config/config.inc.php
 fi
 
 
